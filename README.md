@@ -45,19 +45,19 @@ It might that you need to append `--profile my-aws-profile` to each command belo
 
 Each of them will just synthesize Cloudformation to `cdk.out`. If you want to deploy, you can run `npx sst deploy --stage name-from-below`.
 
-### SST with CDK pipelines
+### SST with CDK pipelines (ERROR)
 
 ```sh
 pnpm sst-pipeline # --profile my-aws-profile
 ```
 
-### SST without CDK pipelines
+### SST without CDK pipelines (No ERROR)
 
 ```sh
 pnpm sst-no-pipeline # --profile my-aws-profile
 ```
 
-### Native CDK with CDK pipelines
+### Native CDK with CDK pipelines (No ERROR)
 
 ```sh
 pnpm cdk-pipeline # --profile my-aws-profile

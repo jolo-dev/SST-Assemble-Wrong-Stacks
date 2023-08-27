@@ -64,3 +64,7 @@ pnpm cdk-pipeline # --profile my-aws-profile
 ```
 
 The expected result should be similar to [CDK-pipeline output](#native-cdk-with-cdk-pipelines).
+
+## Discord Thread
+
+[https://discord.com/channels/983865673656705025/1145309813266456677/1145309813266456677](https://discord.com/channels/983865673656705025/1145309813266456677/1145309813266456677)

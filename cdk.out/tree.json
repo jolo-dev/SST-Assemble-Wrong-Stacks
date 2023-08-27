@@ -1,0 +1,2283 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack": {
+        "id": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack",
+        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack",
+        "children": {
+          "CustomResourceHandler": {
+            "id": "CustomResourceHandler",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CustomResourceHandler",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CustomResourceHandler/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CustomResourceHandler/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CustomResourceHandler/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "SST-Assemble-Wrong-Stacks"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "sst-no-pipeline"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.91.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CustomResourceHandler/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CustomResourceHandler/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CustomResourceHandler/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.91.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CustomResourceHandler/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-191282919495-eu-central-1",
+                      "s3Key": "8569763966623b5ee340562531977fe8715309df020e418cf7d4c50484247fcb.zip"
+                    },
+                    "handler": "index.handler",
+                    "memorySize": 1024,
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CustomResourceHandlerServiceRole41AEC181",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs16.x",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "SST-Assemble-Wrong-Stacks"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "sst-no-pipeline"
+                      }
+                    ],
+                    "timeout": 900
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.91.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.91.0"
+            }
+          },
+          "SST-Assemble-Wrong-Stacks-Pipeline": {
+            "id": "SST-Assemble-Wrong-Stacks-Pipeline",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline",
+            "children": {
+              "Pipeline": {
+                "id": "Pipeline",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline",
+                "children": {
+                  "ArtifactsBucketEncryptionKey": {
+                    "id": "ArtifactsBucketEncryptionKey",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/ArtifactsBucketEncryptionKey",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/ArtifactsBucketEncryptionKey/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::KMS::Key",
+                          "aws:cdk:cloudformation:props": {
+                            "keyPolicy": {
+                              "Statement": [
+                                {
+                                  "Action": "kms:*",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "AWS": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":iam::191282919495:root"
+                                        ]
+                                      ]
+                                    }
+                                  },
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "tags": [
+                              {
+                                "key": "sst:app",
+                                "value": "SST-Assemble-Wrong-Stacks"
+                              },
+                              {
+                                "key": "sst:stage",
+                                "value": "sst-no-pipeline"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_kms.CfnKey",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_kms.Key",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "ArtifactsBucketEncryptionKeyAlias": {
+                    "id": "ArtifactsBucketEncryptionKeyAlias",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/ArtifactsBucketEncryptionKeyAlias",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/ArtifactsBucketEncryptionKeyAlias/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::KMS::Alias",
+                          "aws:cdk:cloudformation:props": {
+                            "aliasName": "alias/codepipeline-sstnopipelinesstassemblewrongstackspipelinestacksstassemblewrongstackspipelinee7e6bb6c",
+                            "targetKeyId": {
+                              "Fn::GetAtt": [
+                                "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_kms.CfnAlias",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_kms.Alias",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "ArtifactsBucket": {
+                    "id": "ArtifactsBucket",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/ArtifactsBucket",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/ArtifactsBucket/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                          "aws:cdk:cloudformation:props": {
+                            "bucketEncryption": {
+                              "serverSideEncryptionConfiguration": [
+                                {
+                                  "serverSideEncryptionByDefault": {
+                                    "sseAlgorithm": "aws:kms",
+                                    "kmsMasterKeyId": {
+                                      "Fn::GetAtt": [
+                                        "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                        "Arn"
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "publicAccessBlockConfiguration": {
+                              "blockPublicAcls": true,
+                              "blockPublicPolicy": true,
+                              "ignorePublicAcls": true,
+                              "restrictPublicBuckets": true
+                            },
+                            "tags": [
+                              {
+                                "key": "sst:app",
+                                "value": "SST-Assemble-Wrong-Stacks"
+                              },
+                              {
+                                "key": "sst:stage",
+                                "value": "sst-no-pipeline"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                          "version": "2.91.0"
+                        }
+                      },
+                      "Policy": {
+                        "id": "Policy",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/ArtifactsBucket/Policy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/ArtifactsBucket/Policy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::S3::BucketPolicy",
+                              "aws:cdk:cloudformation:props": {
+                                "bucket": {
+                                  "Ref": "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3"
+                                },
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "s3:*",
+                                      "Condition": {
+                                        "Bool": {
+                                          "aws:SecureTransport": "false"
+                                        }
+                                      },
+                                      "Effect": "Deny",
+                                      "Principal": {
+                                        "AWS": "*"
+                                      },
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_s3.CfnBucketPolicy",
+                              "version": "2.91.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketPolicy",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.Bucket",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Role": {
+                    "id": "Role",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Role",
+                    "children": {
+                      "ImportRole": {
+                        "id": "ImportRole",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Role/ImportRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.91.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Role/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "codepipeline.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "tags": [
+                              {
+                                "key": "sst:app",
+                                "value": "SST-Assemble-Wrong-Stacks"
+                              },
+                              {
+                                "key": "sst:stage",
+                                "value": "sst-no-pipeline"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.91.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Role/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Role/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "s3:GetObject*",
+                                        "s3:GetBucket*",
+                                        "s3:List*",
+                                        "s3:DeleteObject*",
+                                        "s3:PutObject",
+                                        "s3:PutObjectLegalHold",
+                                        "s3:PutObjectRetention",
+                                        "s3:PutObjectTagging",
+                                        "s3:PutObjectVersionTagging",
+                                        "s3:Abort*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": [
+                                        "kms:Decrypt",
+                                        "kms:DescribeKey",
+                                        "kms:Encrypt",
+                                        "kms:ReEncrypt*",
+                                        "kms:GenerateDataKey*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA",
+                                          "Arn"
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "SSTAssembleWrongStacksPipelineRoleDefaultPolicy7841AF53",
+                                "roles": [
+                                  {
+                                    "Ref": "SSTAssembleWrongStacksPipelineRole2A5BAA97"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.91.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CodePipeline::Pipeline",
+                      "aws:cdk:cloudformation:props": {
+                        "artifactStore": {
+                          "type": "S3",
+                          "location": {
+                            "Ref": "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3"
+                          },
+                          "encryptionKey": {
+                            "type": "KMS",
+                            "id": {
+                              "Fn::GetAtt": [
+                                "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        },
+                        "name": "SST-Assemble-Wrong-Stacks",
+                        "restartExecutionOnUpdate": true,
+                        "roleArn": {
+                          "Fn::GetAtt": [
+                            "SSTAssembleWrongStacksPipelineRole2A5BAA97",
+                            "Arn"
+                          ]
+                        },
+                        "stages": [
+                          {
+                            "name": "Source",
+                            "actions": [
+                              {
+                                "name": "jolo-dev_SST-Assemble-Wrong-Stacks",
+                                "outputArtifacts": [
+                                  {
+                                    "name": "jolo_dev_SST_Assemble_Wrong_Stacks_Source"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Source",
+                                  "version": "1",
+                                  "owner": "ThirdParty",
+                                  "provider": "GitHub"
+                                },
+                                "configuration": {
+                                  "Owner": "jolo-dev",
+                                  "Repo": "SST-Assemble-Wrong-Stacks",
+                                  "Branch": "main",
+                                  "OAuthToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
+                                  "PollForSourceChanges": false
+                                },
+                                "runOrder": 1
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Build",
+                            "actions": [
+                              {
+                                "name": "Synth",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "jolo_dev_SST_Assemble_Wrong_Stacks_Source"
+                                  }
+                                ],
+                                "outputArtifacts": [
+                                  {
+                                    "name": "Synth_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Build",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeBuild"
+                                },
+                                "configuration": {
+                                  "ProjectName": {
+                                    "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538"
+                                  },
+                                  "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"95e9150e5acd7ab9d7dba73a4357f8adddc278249a66e0361cd51e19ffc7087d\"}]"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "name": "UpdatePipeline",
+                            "actions": [
+                              {
+                                "name": "SelfMutate",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "Synth_Output"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Build",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeBuild"
+                                },
+                                "configuration": {
+                                  "ProjectName": {
+                                    "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0"
+                                  },
+                                  "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"3db358c1dafe36aebf752426ed4a79fdd9e11877602260d1d0fbd10b099e1526\"}]"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "SST-Assemble-Wrong-Stacks"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "sst-no-pipeline"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_codepipeline.CfnPipeline",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Source": {
+                    "id": "Source",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Source",
+                    "children": {
+                      "jolo-dev_SST-Assemble-Wrong-Stacks": {
+                        "id": "jolo-dev_SST-Assemble-Wrong-Stacks",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Source/jolo-dev_SST-Assemble-Wrong-Stacks",
+                        "children": {
+                          "WebhookResource": {
+                            "id": "WebhookResource",
+                            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Source/jolo-dev_SST-Assemble-Wrong-Stacks/WebhookResource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::CodePipeline::Webhook",
+                              "aws:cdk:cloudformation:props": {
+                                "authentication": "GITHUB_HMAC",
+                                "authenticationConfiguration": {
+                                  "secretToken": "{{resolve:secretsmanager:github-token:SecretString:::}}"
+                                },
+                                "filters": [
+                                  {
+                                    "jsonPath": "$.ref",
+                                    "matchEquals": "refs/heads/{Branch}"
+                                  }
+                                ],
+                                "registerWithThirdParty": true,
+                                "targetAction": "jolo-dev_SST-Assemble-Wrong-Stacks",
+                                "targetPipeline": {
+                                  "Ref": "SSTAssembleWrongStacksPipeline1F43E298"
+                                },
+                                "targetPipelineVersion": 1
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_codepipeline.CfnWebhook",
+                              "version": "2.91.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.2.69"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.2.69"
+                    }
+                  },
+                  "Build": {
+                    "id": "Build",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build",
+                    "children": {
+                      "Synth": {
+                        "id": "Synth",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build/Synth",
+                        "children": {
+                          "CdkBuildProject": {
+                            "id": "CdkBuildProject",
+                            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build/Synth/CdkBuildProject",
+                            "children": {
+                              "Role": {
+                                "id": "Role",
+                                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build/Synth/CdkBuildProject/Role",
+                                "children": {
+                                  "ImportRole": {
+                                    "id": "ImportRole",
+                                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build/Synth/CdkBuildProject/Role/ImportRole",
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.Resource",
+                                      "version": "2.91.0"
+                                    }
+                                  },
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build/Synth/CdkBuildProject/Role/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                      "aws:cdk:cloudformation:props": {
+                                        "assumeRolePolicyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": "sts:AssumeRole",
+                                              "Effect": "Allow",
+                                              "Principal": {
+                                                "Service": "codebuild.amazonaws.com"
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "tags": [
+                                          {
+                                            "key": "sst:app",
+                                            "value": "SST-Assemble-Wrong-Stacks"
+                                          },
+                                          {
+                                            "key": "sst:stage",
+                                            "value": "sst-no-pipeline"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                                      "version": "2.91.0"
+                                    }
+                                  },
+                                  "DefaultPolicy": {
+                                    "id": "DefaultPolicy",
+                                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build/Synth/CdkBuildProject/Role/DefaultPolicy",
+                                    "children": {
+                                      "Resource": {
+                                        "id": "Resource",
+                                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build/Synth/CdkBuildProject/Role/DefaultPolicy/Resource",
+                                        "attributes": {
+                                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                          "aws:cdk:cloudformation:props": {
+                                            "policyDocument": {
+                                              "Statement": [
+                                                {
+                                                  "Action": [
+                                                    "logs:CreateLogGroup",
+                                                    "logs:CreateLogStream",
+                                                    "logs:PutLogEvents"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": [
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          "arn:",
+                                                          {
+                                                            "Ref": "AWS::Partition"
+                                                          },
+                                                          ":logs:eu-central-1:191282919495:log-group:/aws/codebuild/",
+                                                          {
+                                                            "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538"
+                                                          }
+                                                        ]
+                                                      ]
+                                                    },
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          "arn:",
+                                                          {
+                                                            "Ref": "AWS::Partition"
+                                                          },
+                                                          ":logs:eu-central-1:191282919495:log-group:/aws/codebuild/",
+                                                          {
+                                                            "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538"
+                                                          },
+                                                          ":*"
+                                                        ]
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "codebuild:CreateReportGroup",
+                                                    "codebuild:CreateReport",
+                                                    "codebuild:UpdateReport",
+                                                    "codebuild:BatchPutTestCases",
+                                                    "codebuild:BatchPutCodeCoverages"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": {
+                                                    "Fn::Join": [
+                                                      "",
+                                                      [
+                                                        "arn:",
+                                                        {
+                                                          "Ref": "AWS::Partition"
+                                                        },
+                                                        ":codebuild:eu-central-1:191282919495:report-group/",
+                                                        {
+                                                          "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538"
+                                                        },
+                                                        "-*"
+                                                      ]
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "s3:GetObject*",
+                                                    "s3:GetBucket*",
+                                                    "s3:List*",
+                                                    "s3:DeleteObject*",
+                                                    "s3:PutObject",
+                                                    "s3:PutObjectLegalHold",
+                                                    "s3:PutObjectRetention",
+                                                    "s3:PutObjectTagging",
+                                                    "s3:PutObjectVersionTagging",
+                                                    "s3:Abort*"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": [
+                                                    {
+                                                      "Fn::GetAtt": [
+                                                        "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+                                                        "Arn"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          {
+                                                            "Fn::GetAtt": [
+                                                              "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+                                                              "Arn"
+                                                            ]
+                                                          },
+                                                          "/*"
+                                                        ]
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "kms:Decrypt",
+                                                    "kms:DescribeKey",
+                                                    "kms:Encrypt",
+                                                    "kms:ReEncrypt*",
+                                                    "kms:GenerateDataKey*"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": {
+                                                    "Fn::GetAtt": [
+                                                      "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                                      "Arn"
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "kms:Decrypt",
+                                                    "kms:Encrypt",
+                                                    "kms:ReEncrypt*",
+                                                    "kms:GenerateDataKey*"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": {
+                                                    "Fn::GetAtt": [
+                                                      "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                                      "Arn"
+                                                    ]
+                                                  }
+                                                }
+                                              ],
+                                              "Version": "2012-10-17"
+                                            },
+                                            "policyName": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectRoleDefaultPolicy7F12DA92",
+                                            "roles": [
+                                              {
+                                                "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectRole967C7912"
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        "constructInfo": {
+                                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                          "version": "2.91.0"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                                      "version": "2.91.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                                  "version": "2.91.0"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/Build/Synth/CdkBuildProject/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::CodeBuild::Project",
+                                  "aws:cdk:cloudformation:props": {
+                                    "artifacts": {
+                                      "type": "CODEPIPELINE"
+                                    },
+                                    "cache": {
+                                      "type": "NO_CACHE"
+                                    },
+                                    "description": "Pipeline step sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/Pipeline/Build/Synth",
+                                    "encryptionKey": {
+                                      "Fn::GetAtt": [
+                                        "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "environment": {
+                                      "type": "LINUX_CONTAINER",
+                                      "image": "aws/codebuild/standard:6.0",
+                                      "imagePullCredentialsType": "CODEBUILD",
+                                      "privilegedMode": false,
+                                      "computeType": "BUILD_GENERAL1_SMALL"
+                                    },
+                                    "serviceRole": {
+                                      "Fn::GetAtt": [
+                                        "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectRole967C7912",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "source": {
+                                      "type": "CODEPIPELINE",
+                                      "buildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"build\": {\n      \"commands\": [\n        \"npx sst build --to cdk.out\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"base-directory\": \"cdk.out\",\n    \"files\": \"**/*\"\n  }\n}"
+                                    },
+                                    "tags": [
+                                      {
+                                        "key": "sst:app",
+                                        "value": "SST-Assemble-Wrong-Stacks"
+                                      },
+                                      {
+                                        "key": "sst:stage",
+                                        "value": "sst-no-pipeline"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_codebuild.CfnProject",
+                                  "version": "2.91.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_codebuild.PipelineProject",
+                              "version": "2.91.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.2.69"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.2.69"
+                    }
+                  },
+                  "UpdatePipeline": {
+                    "id": "UpdatePipeline",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/UpdatePipeline",
+                    "children": {
+                      "SelfMutate": {
+                        "id": "SelfMutate",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/Pipeline/UpdatePipeline/SelfMutate",
+                        "constructInfo": {
+                          "fqn": "constructs.Construct",
+                          "version": "10.2.69"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "constructs.Construct",
+                      "version": "10.2.69"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_codepipeline.Pipeline",
+                  "version": "2.91.0"
+                }
+              },
+              "CodeBuildActionRole": {
+                "id": "CodeBuildActionRole",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/CodeBuildActionRole",
+                "children": {
+                  "ImportCodeBuildActionRole": {
+                    "id": "ImportCodeBuildActionRole",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/CodeBuildActionRole/ImportCodeBuildActionRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/CodeBuildActionRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "AWS": {
+                                  "Fn::GetAtt": [
+                                    "SSTAssembleWrongStacksPipelineRole2A5BAA97",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "SST-Assemble-Wrong-Stacks"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "sst-no-pipeline"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/CodeBuildActionRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/CodeBuildActionRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "codebuild:BatchGetBuilds",
+                                    "codebuild:StartBuild",
+                                    "codebuild:StopBuild"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538",
+                                      "Arn"
+                                    ]
+                                  }
+                                },
+                                {
+                                  "Action": [
+                                    "codebuild:BatchGetBuilds",
+                                    "codebuild:StartBuild",
+                                    "codebuild:StopBuild"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": {
+                                    "Fn::GetAtt": [
+                                      "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0",
+                                      "Arn"
+                                    ]
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "SSTAssembleWrongStacksPipelineCodeBuildActionRoleDefaultPolicyC2033213",
+                            "roles": [
+                              {
+                                "Ref": "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.91.0"
+                }
+              },
+              "UpdatePipeline": {
+                "id": "UpdatePipeline",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/UpdatePipeline",
+                "children": {
+                  "SelfMutation": {
+                    "id": "SelfMutation",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/UpdatePipeline/SelfMutation",
+                    "children": {
+                      "Role": {
+                        "id": "Role",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/UpdatePipeline/SelfMutation/Role",
+                        "children": {
+                          "ImportRole": {
+                            "id": "ImportRole",
+                            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/UpdatePipeline/SelfMutation/Role/ImportRole",
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.Resource",
+                              "version": "2.91.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/UpdatePipeline/SelfMutation/Role/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "codebuild.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "tags": [
+                                  {
+                                    "key": "sst:app",
+                                    "value": "SST-Assemble-Wrong-Stacks"
+                                  },
+                                  {
+                                    "key": "sst:stage",
+                                    "value": "sst-no-pipeline"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                              "version": "2.91.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": [
+                                            "logs:CreateLogGroup",
+                                            "logs:CreateLogStream",
+                                            "logs:PutLogEvents"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":logs:eu-central-1:191282919495:log-group:/aws/codebuild/",
+                                                  {
+                                                    "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0"
+                                                  }
+                                                ]
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":logs:eu-central-1:191282919495:log-group:/aws/codebuild/",
+                                                  {
+                                                    "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0"
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "Action": [
+                                            "codebuild:CreateReportGroup",
+                                            "codebuild:CreateReport",
+                                            "codebuild:UpdateReport",
+                                            "codebuild:BatchPutTestCases",
+                                            "codebuild:BatchPutCodeCoverages"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::Join": [
+                                              "",
+                                              [
+                                                "arn:",
+                                                {
+                                                  "Ref": "AWS::Partition"
+                                                },
+                                                ":codebuild:eu-central-1:191282919495:report-group/",
+                                                {
+                                                  "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0"
+                                                },
+                                                "-*"
+                                              ]
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Condition": {
+                                            "ForAnyValue:StringEquals": {
+                                              "iam:ResourceTag/aws-cdk:bootstrap-role": [
+                                                "image-publishing",
+                                                "file-publishing",
+                                                "deploy"
+                                              ]
+                                            }
+                                          },
+                                          "Effect": "Allow",
+                                          "Resource": "arn:*:iam::191282919495:role/*"
+                                        },
+                                        {
+                                          "Action": "cloudformation:DescribeStacks",
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": "s3:ListBucket",
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": [
+                                            "s3:GetObject*",
+                                            "s3:GetBucket*",
+                                            "s3:List*"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::GetAtt": [
+                                                "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  "/*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "Action": [
+                                            "kms:Decrypt",
+                                            "kms:DescribeKey"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::GetAtt": [
+                                              "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                              "Arn"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "Action": [
+                                            "kms:Decrypt",
+                                            "kms:Encrypt",
+                                            "kms:ReEncrypt*",
+                                            "kms:GenerateDataKey*"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::GetAtt": [
+                                              "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                              "Arn"
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationRoleDefaultPolicy137018FA",
+                                    "roles": [
+                                      {
+                                        "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationRole68F3BD0A"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                                  "version": "2.91.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.Policy",
+                              "version": "2.91.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Role",
+                          "version": "2.91.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SST-Assemble-Wrong-Stacks-Pipeline/UpdatePipeline/SelfMutation/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CodeBuild::Project",
+                          "aws:cdk:cloudformation:props": {
+                            "artifacts": {
+                              "type": "CODEPIPELINE"
+                            },
+                            "cache": {
+                              "type": "NO_CACHE"
+                            },
+                            "description": "Pipeline step sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/Pipeline/UpdatePipeline/SelfMutate",
+                            "encryptionKey": {
+                              "Fn::GetAtt": [
+                                "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+                                "Arn"
+                              ]
+                            },
+                            "environment": {
+                              "type": "LINUX_CONTAINER",
+                              "image": "aws/codebuild/standard:6.0",
+                              "imagePullCredentialsType": "CODEBUILD",
+                              "privilegedMode": false,
+                              "computeType": "BUILD_GENERAL1_SMALL"
+                            },
+                            "name": "SST-Assemble-Wrong-Stacks-selfupdate",
+                            "serviceRole": {
+                              "Fn::GetAtt": [
+                                "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationRole68F3BD0A",
+                                "Arn"
+                              ]
+                            },
+                            "source": {
+                              "type": "CODEPIPELINE",
+                              "buildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g aws-cdk@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk -a . deploy sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack --require-approval=never --verbose\"\n      ]\n    }\n  }\n}"
+                            },
+                            "tags": [
+                              {
+                                "key": "sst:app",
+                                "value": "SST-Assemble-Wrong-Stacks"
+                              },
+                              {
+                                "key": "sst:stage",
+                                "value": "sst-no-pipeline"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_codebuild.CfnProject",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_codebuild.PipelineProject",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "constructs.Construct",
+                  "version": "10.2.69"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.pipelines.CodePipeline",
+              "version": "2.91.0"
+            }
+          },
+          "SSTStackOutputSSTMetadata": {
+            "id": "SSTStackOutputSSTMetadata",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/SSTStackOutputSSTMetadata",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.91.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.91.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.91.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.91.0"
+        }
+      },
+      "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack": {
+        "id": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack",
+        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack",
+        "children": {
+          "CustomResourceHandler": {
+            "id": "CustomResourceHandler",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CustomResourceHandler",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CustomResourceHandler/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CustomResourceHandler/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CustomResourceHandler/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ],
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "SST-Assemble-Wrong-Stacks"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "sst-no-pipeline"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.91.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CustomResourceHandler/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CustomResourceHandler/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CustomResourceHandler/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.91.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CustomResourceHandler/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-191282919495-eu-central-1",
+                      "s3Key": "21e80718709c168f3e7b76b8abe870ffc926dcaad52e7ee5f0a90ffdff719a77.zip"
+                    },
+                    "handler": "index.handler",
+                    "memorySize": 1024,
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CustomResourceHandlerServiceRole41AEC181",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs16.x",
+                    "tags": [
+                      {
+                        "key": "sst:app",
+                        "value": "SST-Assemble-Wrong-Stacks"
+                      },
+                      {
+                        "key": "sst:stage",
+                        "value": "sst-no-pipeline"
+                      }
+                    ],
+                    "timeout": 900
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.91.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.91.0"
+            }
+          },
+          "Api": {
+            "id": "Api",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api",
+            "children": {
+              "Api": {
+                "id": "Api",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Api",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Api/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Api",
+                      "aws:cdk:cloudformation:props": {
+                        "corsConfiguration": {
+                          "allowCredentials": false,
+                          "allowHeaders": [
+                            "*"
+                          ],
+                          "allowMethods": [
+                            "*"
+                          ],
+                          "allowOrigins": [
+                            "*"
+                          ]
+                        },
+                        "name": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-Api",
+                        "protocolType": "HTTP",
+                        "tags": {
+                          "sst:app": "SST-Assemble-Wrong-Stacks",
+                          "sst:stage": "sst-no-pipeline"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnApi",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "DefaultStage": {
+                    "id": "DefaultStage",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Api/DefaultStage",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Api/DefaultStage/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Stage",
+                          "aws:cdk:cloudformation:props": {
+                            "accessLogSettings": {
+                              "format": "{\"requestTime\":\"$context.requestTime\",\"requestId\":\"$context.requestId\",\"httpMethod\":\"$context.httpMethod\",\"path\":\"$context.path\",\"routeKey\":\"$context.routeKey\",\"status\":$context.status,\"responseLatency\":$context.responseLatency,\"integrationRequestId\":\"$context.integration.requestId\",\"integrationStatus\":\"$context.integration.status\",\"integrationLatency\":\"$context.integration.latency\",\"integrationServiceStatus\":\"$context.integration.integrationStatus\",\"ip\":\"$context.identity.sourceIp\",\"userAgent\":\"$context.identity.userAgent\"}",
+                              "destinationArn": {
+                                "Fn::GetAtt": [
+                                  "ApiLogGroup1717FE17",
+                                  "Arn"
+                                ]
+                              }
+                            },
+                            "apiId": {
+                              "Ref": "ApiCD79AAA0"
+                            },
+                            "autoDeploy": true,
+                            "stageName": "$default",
+                            "tags": {
+                              "sst:app": "SST-Assemble-Wrong-Stacks",
+                              "sst:stage": "sst-no-pipeline"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnStage",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpStage",
+                      "version": "2.91.0-alpha.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpApi",
+                  "version": "2.91.0-alpha.0"
+                }
+              },
+              "LogGroup": {
+                "id": "LogGroup",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/LogGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/LogGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Logs::LogGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "logGroupName": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "/aws/vendedlogs/apis/sst-no-pipeline-SST-Assemble-Wrong-Stacks-Api-",
+                              {
+                                "Ref": "ApiCD79AAA0"
+                              },
+                              "/default"
+                            ]
+                          ]
+                        },
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "SST-Assemble-Wrong-Stacks"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "sst-no-pipeline"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_logs.CfnLogGroup",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_logs.LogGroup",
+                  "version": "2.91.0"
+                }
+              },
+              "Lambda_GET_--": {
+                "id": "Lambda_GET_--",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--",
+                "children": {
+                  "ServiceRole": {
+                    "id": "ServiceRole",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/ServiceRole",
+                    "children": {
+                      "ImportServiceRole": {
+                        "id": "ImportServiceRole",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/ServiceRole/ImportServiceRole",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.Resource",
+                          "version": "2.91.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/ServiceRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "lambda.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "managedPolicyArns": [
+                              {
+                                "Fn::Join": [
+                                  "",
+                                  [
+                                    "arn:",
+                                    {
+                                      "Ref": "AWS::Partition"
+                                    },
+                                    ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                  ]
+                                ]
+                              }
+                            ],
+                            "tags": [
+                              {
+                                "key": "sst:app",
+                                "value": "SST-Assemble-Wrong-Stacks"
+                              },
+                              {
+                                "key": "sst:stage",
+                                "value": "sst-no-pipeline"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                          "version": "2.91.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/ServiceRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/ServiceRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "xray:PutTraceSegments",
+                                        "xray:PutTelemetryRecords"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": "*"
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "ApiLambdaGETServiceRoleDefaultPolicy013A8DEA",
+                                "roles": [
+                                  {
+                                    "Ref": "ApiLambdaGETServiceRole210B6205"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                              "version": "2.91.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.Policy",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Role",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                      "aws:cdk:cloudformation:props": {
+                        "architectures": [
+                          "x86_64"
+                        ],
+                        "code": {
+                          "s3Bucket": "cdk-hnb659fds-assets-191282919495-eu-central-1",
+                          "s3Key": "da38819d54f8498559312c94dd501165ed6330daf207b62e4df9fb1d3e7b2d23.zip"
+                        },
+                        "environment": {
+                          "variables": {
+                            "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1",
+                            "SST_APP": "SST-Assemble-Wrong-Stacks",
+                            "SST_STAGE": "sst-no-pipeline",
+                            "SST_SSM_PREFIX": "/sst/SST-Assemble-Wrong-Stacks/sst-no-pipeline/"
+                          }
+                        },
+                        "ephemeralStorage": {
+                          "size": 512
+                        },
+                        "handler": "packages/functions/src/sstLambda.handler",
+                        "memorySize": 1024,
+                        "role": {
+                          "Fn::GetAtt": [
+                            "ApiLambdaGETServiceRole210B6205",
+                            "Arn"
+                          ]
+                        },
+                        "runtime": "nodejs16.x",
+                        "tags": [
+                          {
+                            "key": "sst:app",
+                            "value": "SST-Assemble-Wrong-Stacks"
+                          },
+                          {
+                            "key": "sst:stage",
+                            "value": "sst-no-pipeline"
+                          }
+                        ],
+                        "timeout": 10,
+                        "tracingConfig": {
+                          "mode": "Active"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Lambda_GET_---Sourcemap": {
+                    "id": "Lambda_GET_---Sourcemap",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/Lambda_GET_---Sourcemap",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/Lambda_GET_---Sourcemap/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.91.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/Lambda_GET_---Sourcemap/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Code": {
+                    "id": "Code",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/Code",
+                    "children": {
+                      "Stage": {
+                        "id": "Stage",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/Code/Stage",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.AssetStaging",
+                          "version": "2.91.0"
+                        }
+                      },
+                      "AssetBucket": {
+                        "id": "AssetBucket",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Lambda_GET_--/Code/AssetBucket",
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.Function",
+                  "version": "2.91.0"
+                }
+              },
+              "Route_GET_--": {
+                "id": "Route_GET_--",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Route_GET_--",
+                "children": {
+                  "Integration_GET_--": {
+                    "id": "Integration_GET_--",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Route_GET_--/Integration_GET_--",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Route_GET_--/Integration_GET_--/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Integration",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Ref": "ApiCD79AAA0"
+                            },
+                            "integrationType": "AWS_PROXY",
+                            "integrationUri": {
+                              "Fn::GetAtt": [
+                                "ApiLambdaGETB1714EF3",
+                                "Arn"
+                              ]
+                            },
+                            "payloadFormatVersion": "2.0"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnIntegration",
+                          "version": "2.91.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpIntegration",
+                      "version": "2.91.0-alpha.0"
+                    }
+                  },
+                  "Integration_GET_---Permission": {
+                    "id": "Integration_GET_---Permission",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Route_GET_--/Integration_GET_---Permission",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                      "aws:cdk:cloudformation:props": {
+                        "action": "lambda:InvokeFunction",
+                        "functionName": {
+                          "Fn::GetAtt": [
+                            "ApiLambdaGETB1714EF3",
+                            "Arn"
+                          ]
+                        },
+                        "principal": "apigateway.amazonaws.com",
+                        "sourceArn": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "arn:",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              ":execute-api:eu-central-1:191282919495:",
+                              {
+                                "Ref": "ApiCD79AAA0"
+                              },
+                              "/*/*/"
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                      "version": "2.91.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Route_GET_--/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::ApiGatewayV2::Route",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Ref": "ApiCD79AAA0"
+                        },
+                        "authorizationType": "NONE",
+                        "routeKey": "GET /",
+                        "target": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "integrations/",
+                              {
+                                "Ref": "ApiRouteGETIntegrationGET10DCD122"
+                              }
+                            ]
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_apigatewayv2.CfnRoute",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-apigatewayv2-alpha.HttpRoute",
+                  "version": "2.91.0-alpha.0"
+                }
+              },
+              "Parameter_url": {
+                "id": "Parameter_url",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Parameter_url",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/Api/Parameter_url/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SSM::Parameter",
+                      "aws:cdk:cloudformation:props": {
+                        "name": "/sst/SST-Assemble-Wrong-Stacks/sst-no-pipeline/Api/Api/url",
+                        "tags": {
+                          "sst:app": "SST-Assemble-Wrong-Stacks",
+                          "sst:stage": "sst-no-pipeline"
+                        },
+                        "type": "String",
+                        "value": {
+                          "Fn::GetAtt": [
+                            "ApiCD79AAA0",
+                            "ApiEndpoint"
+                          ]
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ssm.CfnParameter",
+                      "version": "2.91.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ssm.StringParameter",
+                  "version": "2.91.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.69"
+            }
+          },
+          "SSTStackOutputSSTMetadata": {
+            "id": "SSTStackOutputSSTMetadata",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/SSTStackOutputSSTMetadata",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.91.0"
+            }
+          },
+          "FunctionSourcemapUploaderPolicy": {
+            "id": "FunctionSourcemapUploaderPolicy",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/FunctionSourcemapUploaderPolicy",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/FunctionSourcemapUploaderPolicy/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                  "aws:cdk:cloudformation:props": {
+                    "policyDocument": {
+                      "Statement": [
+                        {
+                          "Action": [
+                            "s3:GetObject",
+                            "s3:PutObject"
+                          ],
+                          "Effect": "Allow",
+                          "Resource": [
+                            {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":s3:::cdk-hnb659fds-assets-191282919495-eu-central-1/*"
+                                ]
+                              ]
+                            },
+                            {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":s3:::sstbootstrap-eucentral134f82fae-1bzc8otub8sdt/*"
+                                ]
+                              ]
+                            }
+                          ]
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "policyName": "FunctionSourcemapUploaderPolicy4149E801",
+                    "roles": [
+                      {
+                        "Ref": "CustomResourceHandlerServiceRole41AEC181"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                  "version": "2.91.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Policy",
+              "version": "2.91.0"
+            }
+          },
+          "FunctionSourcemapUploader": {
+            "id": "FunctionSourcemapUploader",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/FunctionSourcemapUploader",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/FunctionSourcemapUploader/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.91.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CustomResource",
+              "version": "2.91.0"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.91.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "sst-no-pipeline-SST-Assemble-Wrong-Stacks-SstApiStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.91.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.91.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.69"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.91.0"
+    }
+  }
+}

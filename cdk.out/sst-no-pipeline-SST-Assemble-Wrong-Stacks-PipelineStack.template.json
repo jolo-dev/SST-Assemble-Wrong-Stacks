@@ -1,0 +1,1060 @@
+{
+ "Resources": {
+  "CustomResourceHandlerServiceRole41AEC181": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   }
+  },
+  "CustomResourceHandlerE8FB56BA": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-191282919495-eu-central-1",
+     "S3Key": "8569763966623b5ee340562531977fe8715309df020e418cf7d4c50484247fcb.zip"
+    },
+    "Handler": "index.handler",
+    "MemorySize": 1024,
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomResourceHandlerServiceRole41AEC181",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ],
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CustomResourceHandlerServiceRole41AEC181"
+   ]
+  },
+  "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60": {
+   "Type": "AWS::KMS::Key",
+   "Properties": {
+    "KeyPolicy": {
+     "Statement": [
+      {
+       "Action": "kms:*",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::191282919495:root"
+          ]
+         ]
+        }
+       },
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyAliasB4FBF77E": {
+   "Type": "AWS::KMS::Alias",
+   "Properties": {
+    "AliasName": "alias/codepipeline-sstnopipelinesstassemblewrongstackspipelinestacksstassemblewrongstackspipelinee7e6bb6c",
+    "TargetKeyId": {
+     "Fn::GetAtt": [
+      "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+      "Arn"
+     ]
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete"
+  },
+  "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "KMSMasterKeyID": {
+         "Fn::GetAtt": [
+          "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+          "Arn"
+         ]
+        },
+        "SSEAlgorithm": "aws:kms"
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain"
+  },
+  "SSTAssembleWrongStacksPipelineArtifactsBucketPolicy89843282": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   }
+  },
+  "SSTAssembleWrongStacksPipelineRole2A5BAA97": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codepipeline.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipelineRoleDefaultPolicy7841AF53": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SSTAssembleWrongStacksPipelineRoleDefaultPolicy7841AF53",
+    "Roles": [
+     {
+      "Ref": "SSTAssembleWrongStacksPipelineRole2A5BAA97"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipeline1F43E298": {
+   "Type": "AWS::CodePipeline::Pipeline",
+   "Properties": {
+    "ArtifactStore": {
+     "EncryptionKey": {
+      "Id": {
+       "Fn::GetAtt": [
+        "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+        "Arn"
+       ]
+      },
+      "Type": "KMS"
+     },
+     "Location": {
+      "Ref": "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3"
+     },
+     "Type": "S3"
+    },
+    "Name": "SST-Assemble-Wrong-Stacks",
+    "RestartExecutionOnUpdate": true,
+    "RoleArn": {
+     "Fn::GetAtt": [
+      "SSTAssembleWrongStacksPipelineRole2A5BAA97",
+      "Arn"
+     ]
+    },
+    "Stages": [
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Source",
+         "Owner": "ThirdParty",
+         "Provider": "GitHub",
+         "Version": "1"
+        },
+        "Configuration": {
+         "Owner": "jolo-dev",
+         "Repo": "SST-Assemble-Wrong-Stacks",
+         "Branch": "main",
+         "OAuthToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
+         "PollForSourceChanges": false
+        },
+        "Name": "jolo-dev_SST-Assemble-Wrong-Stacks",
+        "OutputArtifacts": [
+         {
+          "Name": "jolo_dev_SST_Assemble_Wrong_Stacks_Source"
+         }
+        ],
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Source"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538"
+         },
+         "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"95e9150e5acd7ab9d7dba73a4357f8adddc278249a66e0361cd51e19ffc7087d\"}]"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "jolo_dev_SST_Assemble_Wrong_Stacks_Source"
+         }
+        ],
+        "Name": "Synth",
+        "OutputArtifacts": [
+         {
+          "Name": "Synth_Output"
+         }
+        ],
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "Build"
+     },
+     {
+      "Actions": [
+       {
+        "ActionTypeId": {
+         "Category": "Build",
+         "Owner": "AWS",
+         "Provider": "CodeBuild",
+         "Version": "1"
+        },
+        "Configuration": {
+         "ProjectName": {
+          "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0"
+         },
+         "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"3db358c1dafe36aebf752426ed4a79fdd9e11877602260d1d0fbd10b099e1526\"}]"
+        },
+        "InputArtifacts": [
+         {
+          "Name": "Synth_Output"
+         }
+        ],
+        "Name": "SelfMutate",
+        "RoleArn": {
+         "Fn::GetAtt": [
+          "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA",
+          "Arn"
+         ]
+        },
+        "RunOrder": 1
+       }
+      ],
+      "Name": "UpdatePipeline"
+     }
+    ],
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   },
+   "DependsOn": [
+    "SSTAssembleWrongStacksPipelineRoleDefaultPolicy7841AF53",
+    "SSTAssembleWrongStacksPipelineRole2A5BAA97"
+   ]
+  },
+  "SSTAssembleWrongStacksPipelineSourcejolodevSSTAssembleWrongStacksWebhookResourceB748F0CE": {
+   "Type": "AWS::CodePipeline::Webhook",
+   "Properties": {
+    "Authentication": "GITHUB_HMAC",
+    "AuthenticationConfiguration": {
+     "SecretToken": "{{resolve:secretsmanager:github-token:SecretString:::}}"
+    },
+    "Filters": [
+     {
+      "JsonPath": "$.ref",
+      "MatchEquals": "refs/heads/{Branch}"
+     }
+    ],
+    "RegisterWithThirdParty": true,
+    "TargetAction": "jolo-dev_SST-Assemble-Wrong-Stacks",
+    "TargetPipeline": {
+     "Ref": "SSTAssembleWrongStacksPipeline1F43E298"
+    },
+    "TargetPipelineVersion": 1
+   }
+  },
+  "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectRole967C7912": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectRoleDefaultPolicy7F12DA92": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:eu-central-1:191282919495:log-group:/aws/codebuild/",
+           {
+            "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538"
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:eu-central-1:191282919495:log-group:/aws/codebuild/",
+           {
+            "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538"
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:CreateReportGroup",
+        "codebuild:CreateReport",
+        "codebuild:UpdateReport",
+        "codebuild:BatchPutTestCases",
+        "codebuild:BatchPutCodeCoverages"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codebuild:eu-central-1:191282919495:report-group/",
+          {
+           "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538"
+          },
+          "-*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectRoleDefaultPolicy7F12DA92",
+    "Roles": [
+     {
+      "Ref": "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectRole967C7912"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/Pipeline/Build/Synth",
+    "EncryptionKey": {
+     "Fn::GetAtt": [
+      "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+      "Arn"
+     ]
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:6.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectRole967C7912",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"build\": {\n      \"commands\": [\n        \"npx sst build --to cdk.out\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"base-directory\": \"cdk.out\",\n    \"files\": \"**/*\"\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "SSTAssembleWrongStacksPipelineRole2A5BAA97",
+          "Arn"
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipelineCodeBuildActionRoleDefaultPolicyC2033213": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild",
+        "codebuild:StopBuild"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SSTAssembleWrongStacksPipelineBuildSynthCdkBuildProjectA384D538",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "codebuild:BatchGetBuilds",
+        "codebuild:StartBuild",
+        "codebuild:StopBuild"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SSTAssembleWrongStacksPipelineCodeBuildActionRoleDefaultPolicyC2033213",
+    "Roles": [
+     {
+      "Ref": "SSTAssembleWrongStacksPipelineCodeBuildActionRole57B7D3EA"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationRole68F3BD0A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "codebuild.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationRoleDefaultPolicy137018FA": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:eu-central-1:191282919495:log-group:/aws/codebuild/",
+           {
+            "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0"
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":logs:eu-central-1:191282919495:log-group:/aws/codebuild/",
+           {
+            "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0"
+           },
+           ":*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "codebuild:CreateReportGroup",
+        "codebuild:CreateReport",
+        "codebuild:UpdateReport",
+        "codebuild:BatchPutTestCases",
+        "codebuild:BatchPutCodeCoverages"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":codebuild:eu-central-1:191282919495:report-group/",
+          {
+           "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0"
+          },
+          "-*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": "sts:AssumeRole",
+       "Condition": {
+        "ForAnyValue:StringEquals": {
+         "iam:ResourceTag/aws-cdk:bootstrap-role": [
+          "image-publishing",
+          "file-publishing",
+          "deploy"
+         ]
+        }
+       },
+       "Effect": "Allow",
+       "Resource": "arn:*:iam::191282919495:role/*"
+      },
+      {
+       "Action": "cloudformation:DescribeStacks",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": "s3:ListBucket",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "SSTAssembleWrongStacksPipelineArtifactsBucket734686D3",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:DescribeKey"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": [
+        "kms:Decrypt",
+        "kms:Encrypt",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationRoleDefaultPolicy137018FA",
+    "Roles": [
+     {
+      "Ref": "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationRole68F3BD0A"
+     }
+    ]
+   }
+  },
+  "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationB71D9BD0": {
+   "Type": "AWS::CodeBuild::Project",
+   "Properties": {
+    "Artifacts": {
+     "Type": "CODEPIPELINE"
+    },
+    "Cache": {
+     "Type": "NO_CACHE"
+    },
+    "Description": "Pipeline step sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack/Pipeline/UpdatePipeline/SelfMutate",
+    "EncryptionKey": {
+     "Fn::GetAtt": [
+      "SSTAssembleWrongStacksPipelineArtifactsBucketEncryptionKeyC3DA7E60",
+      "Arn"
+     ]
+    },
+    "Environment": {
+     "ComputeType": "BUILD_GENERAL1_SMALL",
+     "Image": "aws/codebuild/standard:6.0",
+     "ImagePullCredentialsType": "CODEBUILD",
+     "PrivilegedMode": false,
+     "Type": "LINUX_CONTAINER"
+    },
+    "Name": "SST-Assemble-Wrong-Stacks-selfupdate",
+    "ServiceRole": {
+     "Fn::GetAtt": [
+      "SSTAssembleWrongStacksPipelineUpdatePipelineSelfMutationRole68F3BD0A",
+      "Arn"
+     ]
+    },
+    "Source": {
+     "BuildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": [\n        \"npm install -g aws-cdk@2\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk -a . deploy sst-no-pipeline-SST-Assemble-Wrong-Stacks-PipelineStack --require-approval=never --verbose\"\n      ]\n    }\n  }\n}",
+     "Type": "CODEPIPELINE"
+    },
+    "Tags": [
+     {
+      "Key": "sst:app",
+      "Value": "SST-Assemble-Wrong-Stacks"
+     },
+     {
+      "Key": "sst:stage",
+      "Value": "sst-no-pipeline"
+     }
+    ]
+   }
+  }
+ },
+ "Outputs": {
+  "SSTMetadata": {
+   "Value": "{\"app\":\"SST-Assemble-Wrong-Stacks\",\"stage\":\"sst-no-pipeline\",\"version\":\"2.24.16\",\"metadata\":[]}"
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

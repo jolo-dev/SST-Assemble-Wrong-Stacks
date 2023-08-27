@@ -1,0 +1,22 @@
+{
+  "name": "sst-assemble-wrong-stacks",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cdk-pipeline": "rm -rf cdk.out && sst build --to cdk.out --stage cdk-pipeline",
+    "sst-no-pipeline": "rm -rf cdk.out && sst build --to cdk.out --stage sst-no-pipeline",
+    "sst-pipeline": "rm -rf cdk.out && sst build --to cdk.out --stage sst-pipeline"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^16.1.1",
+    "aws-cdk-lib": "2.91.0",
+    "constructs": "10.2.69",
+    "esbuild": "^0.19.2",
+    "sst": "^2.24.16",
+    "typescript": "^5.2.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

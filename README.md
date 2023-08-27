@@ -1,4 +1,4 @@
-# SST Assemble Wrong Stacks
+# SST bundles Lambda not correct when using CDK pipelines
 
 This is an example repository to show a potential bug.
 
